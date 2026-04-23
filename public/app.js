@@ -7,7 +7,7 @@ async function buscarPokemon() {
     mensajeError.innerText = '';
 
     if (!input) {
-        mensajeError.innerText = 'Che, escribí un nombre o un número primero.';
+        mensajeError.innerText = 'Ingresa nombre o numero por favor';
         return;
     }
 
@@ -32,7 +32,7 @@ async function buscarPokemon() {
         if (error.response && error.response.data && error.response.data.error) {
             mensajeError.innerText = error.response.data.error;
         } else {
-            mensajeError.innerText = 'Hubo un problema de conexión con el servidor.';
+            mensajeError.innerText = 'Hubo un problema de conexión con el servidor';
         }
     }
 }
