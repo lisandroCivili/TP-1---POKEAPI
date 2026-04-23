@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POKEDEX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Buscador de Pokémon</h1>
+        <p>Ingresá el nombre o el número del Pokemon</p>
+
+        <div class="caja-busqueda">
+            <input type="text" id="pokeInput" placeholder="Ej: pikachu o 25">
+            <button onclick="buscarPokemon()">Buscar</button>
+        </div>
+
+        <div id="resultado" class="tarjeta" style="display: none;">
+            <h2 id="pokeNombre"></h2>
+            <p class="numero">Número: #<span id="pokeNum"></span></p>
+            <img id="pokeImg" src="" alt="Imagen del pokemon">
+            
+            <div class="stats">
+                <p><strong>Altura:</strong> <span id="pokeAltura"></span> decímetros</p>
+                <p><strong>Peso:</strong> <span id="pokePeso"></span> hectogramos</p>
+                <p><strong>Tipo(s):</strong> <span id="pokeTipos"></span></p>
+            </div>
+        </div>
+
+        <p id="mensajeError" class="error"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
