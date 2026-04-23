@@ -3,26 +3,21 @@ async function buscarPokemon() {
     const divResultado = document.getElementById('resultado');
     const mensajeError = document.getElementById('mensajeError');
 
-    // Limpiamos la vista antes de buscar
     divResultado.style.display = 'none';
     mensajeError.innerText = '';
 
     if (!input) {
-        mensajeError.innerText = 'Ingrese numero o nombre';
+        mensajeError.innerText = 'Che, escribí un nombre o un número primero.';
         return;
     }
 
     try {
-        // Le pegamos a NUESTRO backend, no directo a la pokeapi
-        const respuesta = await fetch(`/api/pokemon/${input}`);
-        const data = await respuesta.json();
+        // Usamos axios en vez de fetch
+        const respuesta = await axios.get(`/api/pokemon/${input}`);
+        
+        // Acordate que en axios la info viene adentro de ".data"
+        const data = respuesta.data;
 
-        if (!respuesta.ok) {
-            mensajeError.innerText = data.error || 'No se encontró nada.';
-            return;
-        }
-
-        // Si salió todo bien, llenamos los datos en el HTML
         document.getElementById('pokeNombre').innerText = data.nombre.toUpperCase();
         document.getElementById('pokeNum').innerText = data.numero;
         document.getElementById('pokeImg').src = data.imagen;
@@ -30,10 +25,14 @@ async function buscarPokemon() {
         document.getElementById('pokePeso').innerText = data.peso;
         document.getElementById('pokeTipos').innerText = data.tipos;
 
-        // Mostramos la tarjeta
         divResultado.style.display = 'block';
 
     } catch (error) {
-        mensajeError.innerText = 'Hubo un problema de conexión con el servido.';
+        // Atrapamos el error que nos manda nuestro propio backend (el 404 o el 500)
+        if (error.response && error.response.data && error.response.data.error) {
+            mensajeError.innerText = error.response.data.error;
+        } else {
+            mensajeError.innerText = 'Hubo un problema de conexión con el servidor.';
+        }
     }
 }
