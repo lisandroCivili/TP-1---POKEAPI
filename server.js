@@ -28,7 +28,7 @@ app.get('/api/pokemon/:identificador', async (req, res) => {
 
     } catch (error) {
         if (error.respuesta && error.respuesta.status === 404) {
-            return res.status(404).json({ error: 'Pokemón no econtrado.' });
+            return res.status(404).json({ error: 'Pokemón no econtrado' });
         }
         
         console.log("Error en el servidor:", error.message);
